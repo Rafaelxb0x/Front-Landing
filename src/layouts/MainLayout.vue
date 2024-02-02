@@ -7,7 +7,7 @@
           <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
         </q-avatar>
 
-        <q-toolbar-title>Quasar Framework</q-toolbar-title>
+        <q-toolbar-title></q-toolbar-title>
 
         <q-btn flat round dense icon="whatshot" />
       </q-toolbar>
