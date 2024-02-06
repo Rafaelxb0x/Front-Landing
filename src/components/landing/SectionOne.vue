@@ -1,36 +1,30 @@
 <template>
-  <div class="text-center text-h4 text-grey-8">Why Choose Us</div>
-  <div class="text-center text-body1">
+  <div class="text-center text-h4 text-grey-8 q-mt-md">Why Choose Us</div>
+  <div class="text-center text-body1 margin-x-md">
     Our clients have been choosing softlabs for a number of reasons including
     reliability, lastest technologies and constant updates & support. Read more
     about other adventages below.
   </div>
-  <div class="q-pa-md q-gutter-md justify-center">
+  <div class="q-pa-md q-gutter-md margin-md">
     <div
       v-for="(section, index) in sections"
       :key="index"
-      class="row justify-center"
+      class="flex justify-around"
     >
       <q-card
         v-for="(card, cardIndex) in section.cards"
         :key="cardIndex"
-        class="my-card"
+        class="my-card flex justify-center items-center q-mt-md"
       >
-        <img class="img-card" :src="card.image" />
-
-        <q-card-section>
-          <div class="text-h6">{{ card.title }}</div>
-          <div class="text-subtitle2">{{ card.author }}</div>
-        </q-card-section>
-
-        <q-card-section class="q-pt-none">
-          {{ card.text }}
+        <q-card-section class="q-pt-xs q-pb-md text-center">
+          <img class="img-card q-mt-md" :src="card.image" />
+          <div class="text-h6 q-mx-xs q-mb-md q-mt-md">{{ card.title }}</div>
+          <div class="text-body1 q-mx-xs">
+            <p class="text-grey-8">{{ card.text }}</p>
+          </div>
         </q-card-section>
       </q-card>
     </div>
-  </div>
-  <div class="text-h1 flex items-center justify-center full-height">
-    <q-img src="/src/assets/sections/section1.png" />
   </div>
 </template>
 
@@ -41,35 +35,34 @@ const sections = ref([
   {
     cards: [
       {
-        image: "/src/assets/clock.png",
-        title: "Our Changing Planet",
-        author: "by John Doe",
-        text: "hello",
+        image: "/src/assets/results.png",
+        title: "Quick Results",
+        text: "We work quickly and eficently to provide the best results.",
       },
       {
-        image: "/src/assets/cellphone.png",
-        title: "Our Changing Planet",
-        author: "by John Doe",
+        image: "/src/assets/app.png",
+        title: "Powefull Apps",
+        text: "Our team iffers a wude variety of poweful and sustainable apps ",
       },
       {
-        image: "/src/assets/savemoney.png",
-        title: "Our Changing Planet",
-        author: "by John Doe",
+        image: "/src/assets/bag.png",
+        title: "Money saving",
+        text: "Our products cost less than their analogs by other companies",
       },
       {
-        image: "/src/assets/helpdesk.png",
-        title: "Our Changing Planet",
-        author: "by John Doe",
+        image: "/src/assets/support2.png",
+        title: "Efficent Support",
+        text: "Softable offers extensive support to its customers all over the world.",
       },
       {
         image: "/src/assets/innovate.png",
-        title: "Our Changing Planet",
-        author: "by John Doe",
+        title: "Innovate technologies",
+        text: "Our developers use the latest technologies to deliver the best apps",
       },
       {
-        image: "/src/assets/usability.png",
-        title: "Our Changing Planet",
-        author: "by John Doe",
+        image: "/src/assets/usability2.png",
+        title: "Great Usability",
+        text: "Improve usability and UX are distinctive features of our products",
       },
     ],
   },
@@ -78,14 +71,18 @@ const sections = ref([
 
 <style lang="scss" scope>
 .img-card {
-  width: 90px !important;
+  width: 100px !important;
+  height: auto !important;
+  max-height: 90px !important;
 }
-.margin-x-md {
-  margin: 0 340px;
+.margin-md {
+  margin: 0 360px;
 }
 
 .my-card {
   width: 100%;
   max-width: 250px;
+  border: none;
+  box-shadow: none;
 }
 </style>
