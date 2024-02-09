@@ -64,9 +64,6 @@
         </template>
       </q-splitter>
     </div>
-    <div class="text-h1 flex items-center justify-center full-height">
-      <q-img src="/src/assets/sections/section4.png" />
-    </div>
   </section>
 </template>
 

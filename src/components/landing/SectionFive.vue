@@ -52,9 +52,6 @@
         </q-card-section>
       </q-card>
     </div>
-    <div class="text-h1 flex items-center justify-center full-height">
-      <q-img src="/src/assets/sections/section5.png" />
-    </div>
   </section>
 </template>
 
