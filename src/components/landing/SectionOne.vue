@@ -1,6 +1,8 @@
 <template>
-  <div class="text-center text-h4 text-grey-8 q-mt-md">Why Choose Us</div>
-  <div class="text-center text-body1 margin-x-md">
+  <div class="text-center text-h4 text-grey-8 q-mt-lg q-pt-lg">
+    Why Choose Us
+  </div>
+  <div class="text-center text-body1 margin-banner">
     Our clients have been choosing softlabs for a number of reasons including
     reliability, lastest technologies and constant updates & support. Read more
     about other adventages below.
@@ -76,7 +78,7 @@ const sections = ref([
   max-height: 90px !important;
 }
 .margin-md {
-  margin: 0 360px;
+  margin: 0 340px;
 }
 
 .my-card {
@@ -84,5 +86,9 @@ const sections = ref([
   max-width: 250px;
   border: none;
   box-shadow: none;
+}
+
+.margin-banner {
+  margin: 0 300px;
 }
 </style>

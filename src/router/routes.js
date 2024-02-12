@@ -1,19 +1,28 @@
+import { createRouter, createMemoryHistory } from "vue-router";
+import LoginAuth from "../components/auth/LoginAuth.vue";
 
 const routes = [
   {
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
-    ]
+    path: "/",
+    component: () => import("pages/IndexPage.vue"),
+    children: [],
   },
 
-  // Always leave this as last one,
-  // but you can also remove it
   {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue')
-  }
-]
+    path: "/auth/login",
+    name: "LoginAuth",
+    component: LoginAuth,
+  },
 
-export default routes
+  // ... otras rutas
+  {
+    path: "/:catchAll(.*)*",
+    component: () => import("pages/ErrorNotFound.vue"),
+  },
+];
+const router = createRouter({
+  history: createMemoryHistory(),
+  routes,
+});
+export default routes;
+router;

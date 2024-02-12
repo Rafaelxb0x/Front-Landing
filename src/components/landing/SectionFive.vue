@@ -5,7 +5,7 @@
       <q-card class="my-card-1 bg-grey-2 text-white flex items-center">
         <q-card-section class="text-center">
           <div class="text-h4 q-mb-lg text-black text-bold">Silver</div>
-          <div class="text-grey-6 q-mb-lg">{{ lorem }}</div>
+          <div class="text-grey-6 q-mb-lg">{{ msg }}</div>
           <div class="text-h4 text-black q-mb-lg">$100.00/mo</div>
           <q-btn
             class="btn-cards"
@@ -23,7 +23,7 @@
       >
         <q-card-section class="text-center">
           <div class="text-h4 q-mb-lg text-bold">Gold</div>
-          <div class="text-grey-4 q-mb-lg">{{ lorem }}</div>
+          <div class="text-grey-4 q-mb-lg">{{ msg }}</div>
           <div class="text-h4 q-mb-lg">$149.00/mo</div>
           <q-btn
             class="btn-cards"
@@ -39,7 +39,7 @@
           <div class="text-h4 q-mb-lg text-black q-mb-lg text-bold">
             Diamond
           </div>
-          <div class="text-grey-6 q-mb-lg">{{ lorem }}</div>
+          <div class="text-grey-6 q-mb-lg">{{ msg }}</div>
           <div class="text-h4 text-black q-mb-lg">$199.00/mo</div>
           <q-btn
             class="btn-cards"
@@ -55,15 +55,12 @@
   </section>
 </template>
 
-<script>
-export default {
-  setup() {
-    return {
-      lorem:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua incididunt ut labore et dolore magna aliqua.",
-    };
-  },
-};
+<script setup>
+import { ref } from "vue";
+
+const msg = ref(
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit lorem..Lorem ipsum dolor sit amet, consectetur adipiscing elit lorem.."
+);
 </script>
 
 <style lang="scss" scope>
