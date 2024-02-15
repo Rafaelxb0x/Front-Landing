@@ -9,6 +9,12 @@ const routes = [
   },
 
   {
+    path: "/admin",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [],
+  },
+
+  {
     path: "/auth/login",
     name: "LoginAuth",
     component: LoginAuth,

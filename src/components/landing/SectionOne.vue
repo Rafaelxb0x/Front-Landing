@@ -1,31 +1,33 @@
 <template>
-  <div class="text-center text-h4 text-grey-8 q-mt-lg q-pt-lg">
-    Why Choose Us
-  </div>
-  <div class="text-center text-body1 margin-banner">
-    Our clients have been choosing softlabs for a number of reasons including
-    reliability, lastest technologies and constant updates & support. Read more
-    about other adventages below.
-  </div>
-  <div class="q-pa-md q-gutter-md margin-md">
-    <div
-      v-for="(section, index) in sections"
-      :key="index"
-      class="flex justify-around"
-    >
-      <q-card
-        v-for="(card, cardIndex) in section.cards"
-        :key="cardIndex"
-        class="my-card flex justify-center items-center q-mt-md"
+  <div class="container-cards full-width">
+    <div class="text-center text-h4 text-grey-8 q-mt-lg q-pt-lg">
+      Why Choose Us
+    </div>
+    <div class="text-center text-body1 margin-banner">
+      Our clients have been choosing softlabs for a number of reasons including
+      reliability, lastest technologies and constant updates & support. Read
+      more about other adventages below.
+    </div>
+    <div class="q-pa-md q-gutter-md">
+      <div
+        v-for="(section, index) in sections"
+        :key="index"
+        class="flex justify-around"
       >
-        <q-card-section class="q-pt-xs q-pb-md text-center">
-          <img class="img-card q-mt-md" :src="card.image" />
-          <div class="text-h6 q-mx-xs q-mb-md q-mt-md">{{ card.title }}</div>
-          <div class="text-body1 q-mx-xs">
-            <p class="text-grey-8">{{ card.text }}</p>
-          </div>
-        </q-card-section>
-      </q-card>
+        <q-card
+          v-for="(card, cardIndex) in section.cards"
+          :key="cardIndex"
+          class="my-card flex justify-center items-center q-mt-md"
+        >
+          <q-card-section class="q-pt-xs q-pb-md text-center">
+            <img class="img-card q-mt-md" :src="card.image" />
+            <div class="text-h6 q-mx-xs q-mb-md q-mt-md">{{ card.title }}</div>
+            <div class="text-body1 q-mx-xs">
+              <p class="text-grey-8">{{ card.text }}</p>
+            </div>
+          </q-card-section>
+        </q-card>
+      </div>
     </div>
   </div>
 </template>
@@ -88,7 +90,8 @@ const sections = ref([
   box-shadow: none;
 }
 
-.margin-banner {
-  margin: 0 300px;
+.container-cards {
+  width: 100%;
+  padding: 0 20%;
 }
 </style>

@@ -1,23 +1,24 @@
 <template>
-  <section
-    class="bg-purple-10"
-    style="height: auto; width: 100%; padding: 0 150px"
-  >
+  <section class="bg-purple-10 q-px-md">
     <div class="row q-pt-lg">
-      <div class="col">
-        <div class="flex content-center full-height">
-          <div class="text-h2 text-bold text-white q-mb-lg">Softlabs</div>
-          <div class="text-grey-5 text-start">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit
-            ducimus vitae temporibus illo soluta provident obcaecati quos
-            eligendi qui ut quaerat rem ipsam necessitatibus facilis laboriosam
-            dolorem, quod modi cumque.
-          </div>
-          <div class="text-grey-5 q-mt-lg">© 2024 All rights reserved.</div>
+      <div class="col-12 col-md-4 order-last q-my-lg">
+        <div
+          class="text-h2 text-bold text-white q-mb-lg text-center text-md-start"
+        >
+          Softlabs
+        </div>
+        <div class="text-grey-5 text-center text-md-start">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit
+          ducimus vitae temporibus illo soluta provident obcaecati quos eligendi
+          qui ut quaerat rem ipsam necessitatibus facilis laboriosam dolorem,
+          quod modi cumque.
+        </div>
+        <div class="text-white q-mt-lg text-center">
+          © 2024 All rights reserved.
         </div>
       </div>
-      <div class="col">
-        <div class="text-center text-white text-h6 q-mb-lg">
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="text-center text-white text-h5 text-bold">
           Contact information
         </div>
         <div class="flex justify-center">
@@ -50,17 +51,13 @@
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col-12 col-sm-6 col-lg-4 order-first">
         <div class="text-h6 text-white">Contact</div>
-        <div class="">
-          <q-form
-            @submit="onSubmit"
-            @reset="onReset"
-            class="q-gutter-md q-my-md"
-          >
+        <div>
+          <q-form @submit="onSubmit" @reset="onReset" class="q-my-md">
             <q-input
               standout
-              class="full-width"
+              class="full-width q-mb-md"
               filled
               v-model="name"
               label="Name"
@@ -70,7 +67,7 @@
             />
             <q-input
               standout
-              class="full-width"
+              class="full-width q-mb-md"
               v-model="email"
               label="Email"
               filled
@@ -80,7 +77,7 @@
               color="white"
             />
             <q-input
-              class="full-width"
+              class="full-width q-mb-md"
               v-model="text"
               filled
               autogrow
@@ -92,7 +89,7 @@
             />
             <div>
               <q-btn
-                class="btn-form"
+                class="btn-form q-mt-md"
                 rounded
                 unelevated
                 no-caps
@@ -133,27 +130,10 @@ const onReset = () => {
 </script>
 
 <style lang="scss" scope>
-.main-footer {
-  position: relative;
-  // height: 100vh;
+.btn-form {
   width: 100%;
 }
-
-.main-footer .gallery-footer {
-  position: relative;
-  height: auto;
-  width: 100%;
-  margin: auto;
-  padding: 15px 0;
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-gap: 2vh;
-  grid-auto-flow: dense;
-}
-.main-footer .gallery-footer img {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
+.icon-search {
+  font-size: 1.8rem;
 }
 </style>

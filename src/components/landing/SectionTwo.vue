@@ -1,21 +1,19 @@
 <template>
   <section>
-    <div class="row">
-      <div
-        class="flex justify-center items-center full-width bg-purple-10"
-        style="height: 170px"
-      >
-        <div class="text-white q-mr-lg text-h4">
-          Highly Configurable Products
-        </div>
-        <q-btn
-          class="btn-products"
-          unelevated
-          rounded
-          text-color="purple-10"
-          label="Learn More"
-        />
+    <div
+      class="flex justify-center items-center full-width bg-purple-10"
+      style="height: 170px"
+    >
+      <div class="text-white text-center text-h4">
+        Highly Configurable Products
       </div>
+      <q-btn
+        class="btn-products"
+        unelevated
+        rounded
+        text-color="purple-10"
+        label="Learn More"
+      />
     </div>
   </section>
 </template>

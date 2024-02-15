@@ -28,13 +28,6 @@ function accionBoton() {
 </script>
 
 <style scoped>
-.navbar-transparent {
-  background: transparent !important;
-}
-
-.navbar-solid {
-  background: #ffffff !important; /* Cambia esto al color que desees para el fondo sólido */
-}
 .bg-banner {
   height: 510px;
   background-image: url("/src/assets/bg4.png");
