@@ -9,21 +9,17 @@
       more about other adventages below.
     </div>
     <div class="q-pa-md q-gutter-md">
-      <div
-        v-for="(section, index) in sections"
-        :key="index"
-        class="flex justify-around"
-      >
+      <div v-if="cards" class="flex justify-around">
         <q-card
-          v-for="(card, cardIndex) in section.cards"
-          :key="cardIndex"
+          v-for="cards in card"
+          :key="cards.id"
           class="my-card flex justify-center items-center q-mt-md"
         >
           <q-card-section class="q-pt-xs q-pb-md text-center">
             <img class="img-card q-mt-md" :src="card.image" />
             <div class="text-h6 q-mx-xs q-mb-md q-mt-md">{{ card.title }}</div>
             <div class="text-body1 q-mx-xs">
-              <p class="text-grey-8">{{ card.text }}</p>
+              <p class="text-grey-8">{{ card.description }}</p>
             </div>
           </q-card-section>
         </q-card>
@@ -33,6 +29,33 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from "vue";
+import { getData } from "src/services/commonServices";
+
+// const banners = ref();
+let cards = ref([
+  {
+    image: "/src/assets/results.png",
+    title: "Quick Results",
+    description: "We work quickly and eficently to provide the best results.",
+  },
+]);
+
+const fetchBannerData = async () => {
+  await getData("cards/1")
+    .then((result) => {
+      console.log("🚀 ~ .then ~ result:", result.cards);
+      cards.value = result.cards;
+    })
+    .catch((err) => {});
+};
+
+onMounted(() => {
+  fetchBannerData();
+});
+</script>
+
+<!-- <script setup>
 import { ref } from "vue";
 
 const sections = ref([
@@ -71,7 +94,7 @@ const sections = ref([
     ],
   },
 ]);
-</script>
+</script> -->
 
 <style lang="scss" scope>
 .img-card {

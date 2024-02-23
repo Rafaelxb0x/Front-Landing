@@ -1,84 +1,125 @@
 <template>
-  <div class="flex justify-center content-center" style="height: 800px">
-    <div class="row">
-      <q-card class="border-card" style="width: 300px; height: 485px">
-        <q-card-section class="bg-deep-purple-7">
-          <h4 class="text-h5 text-bold text-center text-white q-my-md">
-            {{ isLogin ? "Softlabs" : "Registration" }}
-          </h4>
-          <div
-            class="absolute-bottom-right q-pr-md cursor-pointer"
-            style="transform: translateY(50%)"
-          ></div>
-        </q-card-section>
-        <q-card-section>
-          <q-form class="q-px-sm q-pt-xl q-pb-lg">
-            <q-input
-              square
-              clearable
-              v-model="email"
-              type="email"
-              label="Email"
-            >
-              <template v-slot:prepend>
-                <q-icon name="email" />
-              </template>
-            </q-input>
-            <q-input
-              square
-              clearable
-              v-if="!isLogin"
-              v-model="username"
-              type="username"
-              label="Username"
-            >
-              <template v-slot:prepend>
-                <q-icon name="person" />
-              </template>
-            </q-input>
-            <q-input
-              square
-              clearable
-              v-model="password"
-              type="password"
-              label="Password"
-            >
-              <template v-slot:prepend>
-                <q-icon name="lock" />
-              </template>
-            </q-input>
-          </q-form>
-        </q-card-section>
-        <q-card-actions class="q-px-lg q-mt-lg">
-          <q-btn
-            unelevated
-            rounded
-            size="lg"
-            color="purple-4"
-            class="full-width text-white"
-            :label="isLogin ? 'Sign In' : 'Get Started'"
-          />
-        </q-card-actions>
-      </q-card>
+  <div class="flex full-height">
+    <div class="col">
+      <div class="flex justify-center content-center" style="height: 800px">
+        <div class="row">
+          <q-card class="border-card" style="width: 300px; height: 485px">
+            <q-card-section class="bg-deep-purple-7">
+              <h4 class="text-h5 text-bold text-center text-white q-my-md">
+                {{ "Softlabs" }}
+              </h4>
+            </q-card-section>
+            <q-card-section>
+              <q-form class="q-px-sm q-pt-xl q-pb-lg" @submit="login">
+                <q-input
+                  square
+                  clearable
+                  v-model="email"
+                  type="email"
+                  label="Email"
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="email" />
+                  </template>
+                </q-input>
+                <q-input
+                  square
+                  clearable
+                  v-model="password"
+                  type="password"
+                  label="Password"
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="lock" />
+                  </template>
+                </q-input>
+
+                <q-card-actions class="q-px-lg q-mt-lg">
+                  <q-btn
+                    unelevated
+                    rounded
+                    size="lg"
+                    color="purple-4"
+                    class="full-width text-white"
+                    :label="'Inicia Sesion'"
+                    @click="submitForm"
+                  />
+                </q-card-actions>
+              </q-form>
+            </q-card-section>
+          </q-card>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <q-img src="/src/assets/log3.png" />
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import { useQuasar } from "quasar";
+import axios from "axios";
+
+const $q = useQuasar();
 
 const isLogin = ref(true);
 const email = ref("");
-const username = ref("");
+// const username = ref("");
 const password = ref("");
+const token = ref(null);
+
+const onSubmit = () => {
+  if (accept.value !== true) {
+    $q.notify({
+      color: "red-5",
+      textColor: "white",
+      icon: "warning",
+      message: "You need to accept the license and terms first",
+    });
+  } else {
+    $q.notify({
+      color: "green-4",
+      textColor: "white",
+      icon: "cloud_done",
+      message: "Submitted",
+    });
+  }
+};
 
 const toggleAuthMode = () => {
   isLogin.value = !isLogin.value;
 };
+
+const submitForm = async () => {
+  try {
+    const apiUrl = "http://127.0.0.1:8000/api/login";
+
+    const { data } = await axios.post(apiUrl, {
+      email: email.value,
+      password: password.value,
+    });
+
+    token.value = data.token;
+    this.$router.push("/src/components/admin/Admin-Dashboard.vue");
+
+    console.log("Token de autenticación:", token.value);
+  } catch (error) {
+    console.error("Error al procesar la solicitud:", error.message);
+  }
+};
+
+const onReset = () => {
+  name.value = null;
+  age.value = null;
+  accept.value = false;
+};
 </script>
 
 <style lang="scss" scope>
-.border-card {
-  border-radius: 30px;
+.my-card {
+  max-width: 300px !important;
+  width: 100%;
 }
 </style>

@@ -11,7 +11,24 @@ const routes = [
   {
     path: "/admin",
     component: () => import("layouts/MainLayout.vue"),
-    children: [],
+    children: [
+      {
+        path: "/Admin-Table",
+        component: () => import("components/admin/Admin-Table.vue"),
+      },
+      {
+        path: "/Banner-Dashboard",
+        component: () => import("components/admin/Banner-Dashboard.vue"),
+      },
+      {
+        path: "/form-banner",
+        component: () => import("components/forms/Form-Banner.vue"),
+      },
+      {
+        path: "/form-gallery",
+        component: () => import("components/forms/Form-Gallery.vue"),
+      },
+    ],
   },
 
   {

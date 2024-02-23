@@ -21,7 +21,7 @@
 
 <script setup>
 import Navbar from "src/components/landing/NavBarSection.vue";
-import Banner from "src/components/landing/BannerSection.vue";
+import Banner from "src/components/landing/Banner-Section.vue";
 import SectionOne from "src/components/landing/SectionOne.vue";
 import SectionTwo from "src/components/landing/SectionTwo.vue";
 import SectionThree from "src/components/landing/SectionThree.vue";

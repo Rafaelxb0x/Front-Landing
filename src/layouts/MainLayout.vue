@@ -27,61 +27,83 @@
       >
         <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: 0 }">
           <q-list padding>
-            <q-item active clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="dashboard" />
-              </q-item-section>
-
-              <q-item-section> Dashboard </q-item-section>
-            </q-item>
-
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="star" />
-              </q-item-section>
-
-              <q-item-section> Star </q-item-section>
-            </q-item>
-
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="send" />
-              </q-item-section>
-
-              <q-item-section> Send </q-item-section>
-            </q-item>
-
-            <q-separator />
-
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="drafts" />
-              </q-item-section>
-
-              <q-item-section> Drafts </q-item-section>
-            </q-item>
+            <EssentialLink
+              v-for="(link, index) in linksList"
+              :key="index"
+              v-bind="link"
+              :index="index"
+            />
           </q-list>
         </q-scroll-area>
       </q-drawer>
 
-      <q-page-container>
-        <q-page padding> </q-page>
+      <q-page-container style="height: 100vh">
+        <router-view />
       </q-page-container>
     </q-layout>
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from "vue";
+import { useQuasar } from "quasar";
 
-export default {
-  setup() {
-    return {
-      drawer: ref(false),
-      miniState: ref(true),
-    };
-  },
+import EssentialLink from "src/components/EssentialLink.vue";
+
+const $q = useQuasar();
+
+const drawer = ref(false);
+const miniState = ref(true);
+
+const onClick = () => {
+  $q.notify({
+    color: "red-5",
+    textColor: "white",
+    icon: "warning",
+    message: "You need to log out first!",
+  });
 };
+
+const linksList = [
+  {
+    id: "1",
+    title: "Dashboard",
+    icon: "admin_panel_settings",
+    link: "/Admin-Table",
+    color: "accent",
+  },
+  {
+    id: "2",
+    title: "Banner",
+    icon: "person",
+    link: "/Banner-Dashboard",
+    color: "secondary",
+  },
+  {
+    title: "Gallery",
+    icon: "image",
+    link: "/Form-Gallery",
+    color: "negative",
+  },
+  {
+    title: "Metodos de pago",
+    icon: "account_balance",
+    link: "/payment",
+    color: "positive",
+  },
+  {
+    title: "Vendedores",
+    icon: "person",
+    link: "/sellers",
+    color: "orange-7",
+  },
+  {
+    title: "Perzonalizar",
+    icon: "tune",
+    link: "/custom",
+    color: "orange-7",
+  },
+];
 </script>
 
 <style lang="scss" scope>
