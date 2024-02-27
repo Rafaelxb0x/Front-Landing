@@ -5,12 +5,7 @@
         <q-toolbar>
           <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
           <q-toolbar-title>Administrador</q-toolbar-title>
-          <q-btn
-            color="primary"
-            icon="logout"
-            label="Logout"
-            @click="onClick"
-          />
+          <q-btn color="primary" icon="logout" label="Logout" @click="logOut" />
         </q-toolbar>
       </q-header>
 
@@ -86,22 +81,16 @@ const linksList = [
     color: "negative",
   },
   {
-    title: "Metodos de pago",
-    icon: "account_balance",
-    link: "/payment",
+    title: "Pricing",
+    icon: "sell",
+    link: "/Form-Pricing",
+    color: "negative",
+  },
+  {
+    title: "Settings",
+    icon: "settings",
+    link: "/form-settings",
     color: "positive",
-  },
-  {
-    title: "Vendedores",
-    icon: "person",
-    link: "/sellers",
-    color: "orange-7",
-  },
-  {
-    title: "Perzonalizar",
-    icon: "tune",
-    link: "/custom",
-    color: "orange-7",
   },
 ];
 </script>

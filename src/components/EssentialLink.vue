@@ -23,7 +23,7 @@ const props = defineProps({
     default: "",
   },
   link: {
-    type: Object || String,
+    type: String,
     default: "#",
   },
 });

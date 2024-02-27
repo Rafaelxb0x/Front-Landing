@@ -1,5 +1,4 @@
 import { createRouter, createMemoryHistory } from "vue-router";
-import LoginAuth from "../components/auth/LoginAuth.vue";
 
 const routes = [
   {
@@ -18,6 +17,7 @@ const routes = [
       },
       {
         path: "/Banner-Dashboard",
+        name: "admin.dashboard",
         component: () => import("components/admin/Banner-Dashboard.vue"),
       },
       {
@@ -28,13 +28,21 @@ const routes = [
         path: "/form-gallery",
         component: () => import("components/forms/Form-Gallery.vue"),
       },
+      {
+        path: "/form-pricing",
+        component: () => import("components/forms/Form-Pricing.vue"),
+      },
+      {
+        path: "/form-settings",
+        component: () => import("components/forms/Form-Settings.vue"),
+      },
     ],
   },
 
   {
     path: "/auth/login",
     name: "LoginAuth",
-    component: LoginAuth,
+    component: () => import("src/components/auth/Login-Auth.vue"),
   },
 
   // ... otras rutas

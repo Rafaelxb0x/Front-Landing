@@ -10,7 +10,7 @@
               </h4>
             </q-card-section>
             <q-card-section>
-              <q-form class="q-px-sm q-pt-xl q-pb-lg" @submit="login">
+              <q-form class="q-px-sm q-pt-xl q-pb-lg" @submit="submitForm">
                 <q-input
                   square
                   clearable
@@ -39,10 +39,10 @@
                     unelevated
                     rounded
                     size="lg"
+                    type="submit"
                     color="purple-4"
                     class="full-width text-white"
                     :label="'Inicia Sesion'"
-                    @click="submitForm"
                   />
                 </q-card-actions>
               </q-form>
@@ -51,9 +51,9 @@
         </div>
       </div>
     </div>
-    <div class="col">
+    <!-- <div class="col">
       <q-img src="/src/assets/log3.png" />
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -61,6 +61,7 @@
 import { ref } from "vue";
 import { useQuasar } from "quasar";
 import axios from "axios";
+import { useRouter } from "vue-router";
 
 const $q = useQuasar();
 
@@ -69,6 +70,7 @@ const email = ref("");
 // const username = ref("");
 const password = ref("");
 const token = ref(null);
+const router = useRouter();
 
 const onSubmit = () => {
   if (accept.value !== true) {
@@ -102,18 +104,14 @@ const submitForm = async () => {
     });
 
     token.value = data.token;
-    this.$router.push("/src/components/admin/Admin-Dashboard.vue");
 
-    console.log("Token de autenticación:", token.value);
+    // Access router directly without the '$' prefix
+    router.push({ name: "admin.dashboard" });
+
+    console.log("Authentication Token:", token.value);
   } catch (error) {
-    console.error("Error al procesar la solicitud:", error.message);
+    console.error("Error processing the request:", error.message);
   }
-};
-
-const onReset = () => {
-  name.value = null;
-  age.value = null;
-  accept.value = false;
 };
 </script>
 
