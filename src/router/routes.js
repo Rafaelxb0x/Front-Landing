@@ -20,6 +20,12 @@ const routes = [
         name: "admin.dashboard",
         component: () => import("components/admin/Banner-Dashboard.vue"),
       },
+
+      {
+        path: "/auth/login",
+        name: "login.Auth",
+        component: () => import("components/auth/Login-Auth.vue"),
+      },
       {
         path: "/form-banner",
         component: () => import("components/forms/Form-Banner.vue"),
@@ -41,8 +47,8 @@ const routes = [
 
   {
     path: "/auth/login",
-    name: "LoginAuth",
-    component: () => import("src/components/auth/Login-Auth.vue"),
+    name: "login.Auth",
+    component: () => import("components/auth/Login-Auth.vue"),
   },
 
   // ... otras rutas

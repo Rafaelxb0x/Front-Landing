@@ -54,8 +54,10 @@ export const postData = async (
         icon: "check",
       });
     }
+    console.log(data);
     return data;
   } catch (error) {
+    console.log(error);
     return handleError(error);
   }
 };

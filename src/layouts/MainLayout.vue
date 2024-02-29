@@ -42,6 +42,8 @@
 <script setup>
 import { ref } from "vue";
 import { useQuasar } from "quasar";
+import { deleteData } from "src/services/commonServices";
+import { useRouter } from "vue-router";
 
 import EssentialLink from "src/components/EssentialLink.vue";
 
@@ -49,6 +51,7 @@ const $q = useQuasar();
 
 const drawer = ref(false);
 const miniState = ref(true);
+const router = useRouter();
 
 const onClick = () => {
   $q.notify({
@@ -93,6 +96,17 @@ const linksList = [
     color: "positive",
   },
 ];
+
+const logOut = async () => {
+  try {
+    await deleteData("logout", "Cerraste sesion exitosamente!");
+    localStorage.clear(); // Elimina el token del localStorage
+
+    router.push({ name: "login.Auth" }); // Redirige al usuario a la página de login
+  } catch (error) {
+    console.error("Error processing the request:", error.message);
+  }
+};
 </script>
 
 <style lang="scss" scope>

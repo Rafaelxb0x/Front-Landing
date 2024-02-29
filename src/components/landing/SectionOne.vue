@@ -9,14 +9,21 @@
       more about other adventages below.
     </div>
     <div class="q-pa-md q-gutter-md">
-      <div v-if="cards" class="flex justify-around">
+      <div v-if="sections[0].cards" class="flex justify-around">
         <q-card
-          v-for="cards in card"
-          :key="cards.id"
+          v-for="card in sections[0].cards"
+          :key="card.title"
           class="my-card flex justify-center items-center q-mt-md"
         >
           <q-card-section class="q-pt-xs q-pb-md text-center">
-            <img class="img-card q-mt-md" :src="card.image" />
+            <div
+              class="img-card q-mt-md"
+              v-for="card in cards"
+              :key="card.id"
+              v-bind:style="{
+                backgroundImage: `url(${$file_url + card.image})`,
+              }"
+            ></div>
             <div class="text-h6 q-mx-xs q-mb-md q-mt-md">{{ card.title }}</div>
             <div class="text-body1 q-mx-xs">
               <p class="text-grey-8">{{ card.description }}</p>
@@ -32,69 +39,25 @@
 import { ref, onMounted } from "vue";
 import { getData } from "src/services/commonServices";
 
-// const banners = ref();
-let cards = ref([
-  {
-    image: "/src/assets/results.png",
-    title: "Quick Results",
-    description: "We work quickly and eficently to provide the best results.",
-  },
-]);
-
-const fetchBannerData = async () => {
-  await getData("cards/1")
-    .then((result) => {
-      console.log("🚀 ~ .then ~ result:", result.cards);
-      cards.value = result.cards;
-    })
-    .catch((err) => {});
-};
-
-onMounted(() => {
-  fetchBannerData();
-});
-</script>
-
-<!-- <script setup>
-import { ref } from "vue";
+let cards = ref([]);
 
 const sections = ref([
   {
-    cards: [
-      {
-        image: "/src/assets/results.png",
-        title: "Quick Results",
-        text: "We work quickly and eficently to provide the best results.",
-      },
-      {
-        image: "/src/assets/app.png",
-        title: "Powefull Apps",
-        text: "Our team iffers a wude variety of poweful and sustainable apps ",
-      },
-      {
-        image: "/src/assets/bag.png",
-        title: "Money saving",
-        text: "Our products cost less than their analogs by other companies",
-      },
-      {
-        image: "/src/assets/support2.png",
-        title: "Efficent Support",
-        text: "Softable offers extensive support to its customers all over the world.",
-      },
-      {
-        image: "/src/assets/innovate.png",
-        title: "Innovate technologies",
-        text: "Our developers use the latest technologies to deliver the best apps",
-      },
-      {
-        image: "/src/assets/usability2.png",
-        title: "Great Usability",
-        text: "Improve usability and UX are distinctive features of our products",
-      },
-    ],
+    cards: [], // Inicialmente vacío, se llenará con los datos de la API
   },
 ]);
-</script> -->
+
+onMounted(async () => {
+  try {
+    const data = await getData("cards"); // Reemplaza "ruta/a/tus/datos" con la ruta correcta de tu API
+    sections.value[0].cards = data.cards; // Asume que los datos de la API tienen una estructura similar a tu estado inicial
+    console.log("🚀 ~ onMounted ~ cards:", cards);
+  } catch (error) {
+    console.error("Error al cargar los datos:", error);
+    // Aquí puedes manejar el error como prefieras, por ejemplo, mostrando un mensaje al usuario
+  }
+});
+</script>
 
 <style lang="scss" scope>
 .img-card {

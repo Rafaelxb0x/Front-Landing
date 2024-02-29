@@ -59,9 +59,10 @@
 
 <script setup>
 import { ref } from "vue";
-import { useQuasar } from "quasar";
-import axios from "axios";
+import { LocalStorage, useQuasar } from "quasar";
 import { useRouter } from "vue-router";
+import { api } from "src/boot/axios";
+import { postData } from "src/services/commonServices";
 
 const $q = useQuasar();
 
@@ -96,19 +97,19 @@ const toggleAuthMode = () => {
 
 const submitForm = async () => {
   try {
-    const apiUrl = "http://127.0.0.1:8000/api/login";
-
-    const { data } = await axios.post(apiUrl, {
-      email: email.value,
-      password: password.value,
-    });
-
-    token.value = data.token;
+    const data = await postData(
+      "login",
+      {
+        email: email.value,
+        password: password.value,
+      },
+      {},
+      "Se ha autenticado con éxito"
+    );
+    LocalStorage.set("access_token", data.token);
 
     // Access router directly without the '$' prefix
     router.push({ name: "admin.dashboard" });
-
-    console.log("Authentication Token:", token.value);
   } catch (error) {
     console.error("Error processing the request:", error.message);
   }

@@ -15,19 +15,26 @@ const baseURL = development
   : production
   ? process.env.API_URL_PROD
   : process.env.API_URL;
-const token = LocalStorage.getItem("access_token");
 
 const api = axios.create({
   baseURL: baseURL,
-  headers: {
-    "X-Requested-With": "XMLHttpRequest",
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    Accept: "application/json",
-    Authorization: `Bearer ${token}`,
-  },
-  data: {},
 });
+api.interceptors.request.use(
+  async (config) => {
+    let token = LocalStorage.getItem("access_token");
+    config.headers = {
+      "X-Requested-With": "XMLHttpRequest",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+    return config;
+  },
+  (error) => {
+    Promise.reject(error);
+  }
+);
 const file_url = development
   ? process.env.FILE_URL_DEV
   : production

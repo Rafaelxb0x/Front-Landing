@@ -1,5 +1,5 @@
 <template>
-  <div v-if="banners">
+  <div v-if="shouldShowBanners">
     <div
       class="q-pt-xl q-pb-xl bg-banner flex items-center"
       v-for="banner in banners"
@@ -9,7 +9,7 @@
       }"
     >
       <div class="row">
-        <div class="col-md-4 col-12 q-ml-lg text-white">
+        <div class="col-md-4 col-12 q-ml-lg text-black">
           <div class="text-start q-mt-md q-mb-lg text-h3 text-bold">
             {{ banner.title }}
           </div>
@@ -29,28 +29,40 @@
 import { ref, onMounted } from "vue";
 import { getData } from "src/services/commonServices";
 
-// const banners = ref();
-let banners = ref([
-  {
-    id: 1,
-    title: "Plan Básico",
-    description: "Elige el plan básico para comenzar tu aventura",
-    imageUrl: "./assets/bg4.png",
-  },
-]);
+let banners = ref([]);
 
-const fetchBannerData = async () => {
-  await getData("banner")
-    .then((result) => {
-      console.log("🚀 ~ .then ~ result:", result);
-      banners.value = result.banner;
-    })
-    .catch((err) => {});
+const settings = ref({ status: "true" }); // Valor por defecto
+
+const fetchSettings = async () => {
+  try {
+    const result = await getData("settings");
+    settings.value = result.settings;
+  } catch (error) {
+    console.error("Error al obtener la configuración:", error);
+  }
 };
 
-onMounted(() => {
-  fetchBannerData();
+const fetchBannerData = async () => {
+  try {
+    const result = await getData("banner");
+    banners.value = result.banner;
+  } catch (error) {
+    console.error("Error al obtener los banners:", error);
+  }
+};
+
+onMounted(async () => {
+  await fetchSettings();
+  await fetchBannerData();
 });
+
+// Determina si los banners deben mostrarse según la configuración
+const shouldShowBanners = ref(true);
+
+// Si la sección está desactivada en la configuración, oculta los banners
+if (settings.value.status === "false") {
+  shouldShowBanners.value = false;
+}
 </script>
 
 <style scoped>
