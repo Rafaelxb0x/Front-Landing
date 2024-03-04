@@ -4,20 +4,22 @@
       <div class="text-h5 text-grey-9 q-ml-md q-mt-md text-bold">
         Edit Banner
       </div>
-      <q-card-section>
-        <q-input class="q-mb-md" filled v-model="text" label="Titulo" />
-        <q-input filled v-model="text" label="Descripcion" />
-      </q-card-section>
+      <div v-for="banner in banners" :key="banner.id">
+        <q-card-section>
+          <q-input class="q-mb-md" filled v-model="text" label="Titulo" />
+          <q-input filled v-model="text" label="Descripcion" />
+        </q-card-section>
 
-      <q-card-section>
-        <div>
-          <q-uploader
-            class="full-width full-heigh"
-            style="height: 600px"
-            url="http://localhost:4444/upload"
-          />
-        </div>
-      </q-card-section>
+        <q-card-section>
+          <div>
+            <q-uploader
+              class="full-width full-heigh"
+              style="height: 600px"
+              url="http://localhost:4444/upload"
+            />
+          </div>
+        </q-card-section>
+      </div>
       <div class="row justify-end q-pa-md">
         <q-btn
           rounded
@@ -33,9 +35,23 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { getData } from "src/services/commonServices";
 
 const text = ref("");
+let banners = ref([]);
+
+const getBanners = async () => {
+  try {
+    const responseData = await getData("banner");
+    banners.value = responseData.banner;
+    console.log(responseData);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+onMounted(getBanners);
 </script>
 
 <style lang="scss" scope>
@@ -52,5 +68,10 @@ const text = ref("");
   background-size: cover;
   background-repeat: no-repeat;
   object-fit: cover;
+}
+
+.q-uploader__header-content {
+  padding: 8px;
+  background: radial-gradient(black, transparent);
 }
 </style>

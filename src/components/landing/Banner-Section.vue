@@ -1,5 +1,5 @@
 <template>
-  <div v-if="shouldShowBanners">
+  <div v-if="ShowBanners">
     <div
       class="q-pt-xl q-pb-xl bg-banner flex items-center"
       v-for="banner in banners"
@@ -9,7 +9,7 @@
       }"
     >
       <div class="row">
-        <div class="col-md-4 col-12 q-ml-lg text-black">
+        <div class="col-md-4 col-12 q-ml-lg text-white">
           <div class="text-start q-mt-md q-mb-lg text-h3 text-bold">
             {{ banner.title }}
           </div>
@@ -29,22 +29,13 @@
 import { ref, onMounted } from "vue";
 import { getData } from "src/services/commonServices";
 
-let banners = ref([]);
+const banners = ref([]);
+const ShowBanners = ref(true);
 
-const settings = ref({ status: "true" }); // Valor por defecto
-
-const fetchSettings = async () => {
-  try {
-    const result = await getData("settings");
-    settings.value = result.settings;
-  } catch (error) {
-    console.error("Error al obtener la configuración:", error);
-  }
-};
-
-const fetchBannerData = async () => {
+const bannerData = async () => {
   try {
     const result = await getData("banner");
+    console.log(result);
     banners.value = result.banner;
   } catch (error) {
     console.error("Error al obtener los banners:", error);
@@ -52,20 +43,11 @@ const fetchBannerData = async () => {
 };
 
 onMounted(async () => {
-  await fetchSettings();
-  await fetchBannerData();
+  await bannerData();
 });
-
-// Determina si los banners deben mostrarse según la configuración
-const shouldShowBanners = ref(true);
-
-// Si la sección está desactivada en la configuración, oculta los banners
-if (settings.value.status === "false") {
-  shouldShowBanners.value = false;
-}
 </script>
 
-<style scoped>
+<style lang="scss" scope>
 .bg-banner {
   background-position: center;
   height: 600px;

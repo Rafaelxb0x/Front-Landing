@@ -4,7 +4,7 @@
       class="flex justify-center items-center full-width bg-purple-10"
       style="height: 170px"
     >
-      <div class="text-white text-center text-h4">
+      <div class="text-white text-center text-h4 q-pr-md">
         Highly Configurable Products
       </div>
       <q-btn

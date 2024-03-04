@@ -9,17 +9,15 @@
       more about other adventages below.
     </div>
     <div class="q-pa-md q-gutter-md">
-      <div v-if="sections[0].cards" class="flex justify-around">
+      <div v-if="sections" class="flex justify-around">
         <q-card
-          v-for="card in sections[0].cards"
-          :key="card.title"
+          v-for="card in sections"
+          :key="card.id"
           class="my-card flex justify-center items-center q-mt-md"
         >
           <q-card-section class="q-pt-xs q-pb-md text-center">
             <div
-              class="img-card q-mt-md"
-              v-for="card in cards"
-              :key="card.id"
+              style="height: 200px"
               v-bind:style="{
                 backgroundImage: `url(${$file_url + card.image})`,
               }"
@@ -39,24 +37,20 @@
 import { ref, onMounted } from "vue";
 import { getData } from "src/services/commonServices";
 
-let cards = ref([]);
+const sections = ref([]);
 
-const sections = ref([
-  {
-    cards: [], // Inicialmente vacío, se llenará con los datos de la API
-  },
-]);
-
-onMounted(async () => {
+const loadCards = async () => {
   try {
-    const data = await getData("cards"); // Reemplaza "ruta/a/tus/datos" con la ruta correcta de tu API
-    sections.value[0].cards = data.cards; // Asume que los datos de la API tienen una estructura similar a tu estado inicial
-    console.log("🚀 ~ onMounted ~ cards:", cards);
+    const data = await getData("cards");
+    sections.value = data.cards;
+    console.log("🚀 ~ loadCards ~ sections.value:", sections.value);
   } catch (error) {
-    console.error("Error al cargar los datos:", error);
-    // Aquí puedes manejar el error como prefieras, por ejemplo, mostrando un mensaje al usuario
+    console.error(error.message);
+    // Puedes ajustar el comportamiento en caso de error según tus necesidades
   }
-});
+};
+
+onMounted(loadCards);
 </script>
 
 <style lang="scss" scope>

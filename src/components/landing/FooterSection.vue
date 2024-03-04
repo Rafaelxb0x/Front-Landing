@@ -106,8 +106,8 @@
 </template>
 
 <script setup>
-import { useQuasar } from "quasar";
 import { ref } from "vue";
+import { postData } from "src/services/commonServices";
 
 const name = ref("");
 const email = ref("");
@@ -126,6 +126,19 @@ const onReset = () => {
   email.value = "";
   text.value = "";
   accept.value = false;
+};
+
+const onSubmit = async () => {
+  try {
+    const apiResponse = await postData("contacto/enviar-mensaje", {
+      nombre: name.value,
+      email: email.value,
+      mensaje: text.value,
+    });
+    onReset();
+  } catch (error) {
+    console.error("Error al enviar datos al servidor:", error);
+  }
 };
 </script>
 
