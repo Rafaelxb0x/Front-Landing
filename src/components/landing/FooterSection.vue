@@ -1,11 +1,15 @@
 <template>
   <section class="bg-purple-10 q-px-md">
     <div class="row q-pt-lg">
-      <div class="col-12 col-md-4 order-last q-my-lg">
+      <div
+        class="col-12 col-md-4 order-last q-my-lg"
+        v-for="business in admin"
+        :key="business.id"
+      >
         <div
           class="text-h2 text-bold text-white q-mb-lg text-center text-md-start"
         >
-          Softlabs
+          {{ business.name }}
         </div>
         <div class="text-grey-5 text-center text-md-start">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit
@@ -17,10 +21,12 @@
           © 2024 All rights reserved.
         </div>
       </div>
-      <div class="col-12 col-sm-6 col-lg-4">
-        <div class="text-center text-white text-h5 text-bold">
-          Contact information
-        </div>
+      <div
+        class="col-12 col-sm-6 col-lg-4"
+        v-for="business in admin"
+        :key="business.id"
+      >
+        <div class="text-center text-white text-h5 text-bold">Informacion</div>
         <div class="flex justify-center">
           <div class="flex content-center full-height">
             <q-list class="text-white">
@@ -29,7 +35,7 @@
                   <q-icon color="white" name="phone" />
                 </q-item-section>
 
-                <q-item-section>1-800-1234-467</q-item-section>
+                <q-item-section>+ ( ) {{ business.phone }}</q-item-section>
               </q-item>
 
               <q-item clickable v-ripple>
@@ -37,7 +43,7 @@
                   <q-icon color="white" name="mail" />
                 </q-item-section>
 
-                <q-item-section>Info@demonlink.org</q-item-section>
+                <q-item-section>{{ business.email }}</q-item-section>
               </q-item>
               <div class="flex justify-center q-mt-md">
                 <q-icon
@@ -57,7 +63,7 @@
           <q-form @submit="onSubmit" @reset="onReset" class="q-my-md">
             <q-input
               standout
-              class="full-width q-mb-md"
+              class="full-width q-mb-md text-white"
               filled
               v-model="name"
               label="Name"
@@ -77,7 +83,7 @@
               color="white"
             />
             <q-input
-              class="full-width q-mb-md"
+              class="full-width q-mb-md text-white"
               v-model="text"
               filled
               autogrow
@@ -106,12 +112,15 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { postData } from "src/services/commonServices";
+import { getData } from "src/services/commonServices";
 
 const name = ref("");
 const email = ref("");
 const text = ref("");
+const admin = ref([]);
+
 const accept = ref(false);
 const socialMediaIcons = [
   "fab fa-instagram",
@@ -120,6 +129,28 @@ const socialMediaIcons = [
   "fab fa-facebook-messenger",
   "fab fa-snapchat",
 ];
+
+const loadBusiness = async () => {
+  try {
+    const data = await getData("business");
+    admin.value = data.businesses;
+    console.log("🚀 ~ LoadBusiness ~ value:", admin.value);
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+onMounted(loadBusiness);
+
+// onMounted(async () => {
+//   try {
+//     const data = await getData("business");
+//     admin.value = data.business;
+//     console.log("🚀 ~ onMounted ~ admin.value:", admin.value);
+//   } catch (error) {
+//     console.error("Error al obtener datos de negocios:", error);
+//   }
+// });
 
 const onReset = () => {
   name.value = "";
@@ -130,7 +161,7 @@ const onReset = () => {
 
 const onSubmit = async () => {
   try {
-    const apiResponse = await postData("contacto/enviar-mensaje", {
+    const sendMail = await postData("contacto/enviar-mensaje", {
       nombre: name.value,
       email: email.value,
       mensaje: text.value,

@@ -9,19 +9,19 @@
       more about other adventages below.
     </div>
     <div class="q-pa-md q-gutter-md">
-      <div v-if="sections" class="flex justify-around">
+      <div v-if="sections" class="flex no-wrap justify-around">
         <q-card
           v-for="card in sections"
           :key="card.id"
-          class="my-card flex justify-center items-center q-mt-md"
+          class="flex justify-center items-center q-mr-md"
         >
           <q-card-section class="q-pt-xs q-pb-md text-center">
-            <div
-              style="height: 200px"
-              v-bind:style="{
-                backgroundImage: `url(${$file_url + card.image})`,
-              }"
-            ></div>
+            <q-img
+              class="img-card"
+              v-if="card.image"
+              :src="$file_url + card.image"
+              :ratio="16 / 9"
+            />
             <div class="text-h6 q-mx-xs q-mb-md q-mt-md">{{ card.title }}</div>
             <div class="text-body1 q-mx-xs">
               <p class="text-grey-8">{{ card.description }}</p>
@@ -55,9 +55,10 @@ onMounted(loadCards);
 
 <style lang="scss" scope>
 .img-card {
-  width: 100px !important;
-  height: auto !important;
-  max-height: 90px !important;
+  width: 200px !important;
+  height: 200px !important;
+  background-position: cover;
+  background-repeat: no-repeat;
 }
 .margin-md {
   margin: 0 340px;
