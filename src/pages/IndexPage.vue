@@ -9,12 +9,14 @@
     </q-page-scroller> -->
     <Navbar />
     <Banner />
+    <ArrowUp />
     <SectionOne />
     <SectionTwo />
     <SectionThree />
     <div class="height-section">
       <SectionFive />
     </div>
+    <SectionSix />
     <Footer />
   </div>
 </template>
@@ -28,7 +30,9 @@ import SectionOne from "src/components/landing/SectionOne.vue";
 import SectionTwo from "src/components/landing/SectionTwo.vue";
 import SectionThree from "src/components/landing/SectionThree.vue";
 import SectionFive from "src/components/landing/SectionFive.vue";
+import SectionSix from "src/components/landing/SectionSix.vue";
 import Footer from "src/components/landing/FooterSection.vue";
+import ArrowUp from "src/components/landing/Arrow-Up.vue";
 
 const isLoading = ref(true);
 

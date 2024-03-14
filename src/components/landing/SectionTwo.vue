@@ -4,16 +4,8 @@
       class="flex justify-center items-center full-width bg-purple-10"
       style="height: 170px"
     >
-      <div class="text-white text-center text-h4 q-pr-md">
-        Highly Configurable Products
-      </div>
-      <q-btn
-        class="btn-products"
-        unelevated
-        rounded
-        text-color="purple-10"
-        label="Learn More"
-      />
+      <div class="text-white text-center text-h4 q-pr-md">+58 444 33 22</div>
+      <q-img class="whatsapp-img" src="/src/assets/whatsapp.png"></q-img>
     </div>
   </section>
 </template>
@@ -21,6 +13,11 @@
 <script setup></script>
 
 <style lang="scss" scope>
+.whatsapp-img {
+  width: 100px;
+  height: auto;
+  cursor: pointer;
+}
 .btn-products {
   width: 220px;
   height: 60px;

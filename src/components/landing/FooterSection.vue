@@ -1,66 +1,44 @@
 <template>
-  <section class="bg-purple-10 q-px-md">
-    <div class="row q-pt-lg">
+  <section class="bg-dark">
+    <div class="row q-pt-lg q-px-md">
       <div
-        class="col-12 col-md-4 order-last q-my-lg"
+        class="col-12 col-md-4 col-lg-4"
         v-for="business in admin"
         :key="business.id"
       >
         <div
-          class="text-h2 text-bold text-white q-mb-lg text-center text-md-start"
+          class="text-h5 text-bold text-white q-mb-lg text-start q-ml-lg text-md-start"
         >
           {{ business.name }}
         </div>
-        <div class="text-grey-5 text-center text-md-start">
+        <div class="text-grey-5 text-start text-md-start q-mx-lg">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit
           ducimus vitae temporibus illo soluta provident obcaecati quos eligendi
           qui ut quaerat rem ipsam necessitatibus facilis laboriosam dolorem,
           quod modi cumque.
         </div>
-        <div class="text-white q-mt-lg text-center">
-          © 2024 All rights reserved.
-        </div>
       </div>
       <div
-        class="col-12 col-sm-6 col-lg-4"
+        class="col-12 col-sm-6 col-lg-4 text-center"
         v-for="business in admin"
         :key="business.id"
       >
-        <div class="text-center text-white text-h5 text-bold">Informacion</div>
+        <div class="text-white text-h5 text-bold q-mr-lg">Follow Us</div>
         <div class="flex justify-center">
-          <div class="flex content-center full-height">
-            <q-list class="text-white">
-              <q-item clickable v-ripple>
-                <q-item-section avatar>
-                  <q-icon color="white" name="phone" />
-                </q-item-section>
-
-                <q-item-section>+ ( ) {{ business.phone }}</q-item-section>
-              </q-item>
-
-              <q-item clickable v-ripple>
-                <q-item-section avatar>
-                  <q-icon color="white" name="mail" />
-                </q-item-section>
-
-                <q-item-section>{{ business.email }}</q-item-section>
-              </q-item>
-              <div class="flex justify-center q-mt-md">
-                <q-icon
-                  class="icon-search q-mr-lg"
-                  v-for="icon in socialMediaIcons"
-                  :key="icon"
-                  :name="icon"
-                />
-              </div>
-            </q-list>
-          </div>
+          <q-list class="text-white">
+            <q-icon
+              class="icon-footer q-mt-xl q-mr-lg"
+              v-for="icon in socialMediaIcons"
+              :key="icon"
+              :name="icon"
+            />
+          </q-list>
         </div>
       </div>
-      <div class="col-12 col-sm-6 col-lg-4 order-first">
-        <div class="text-h6 text-white">Contact</div>
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="text-h5 text-bold text-white">Contact</div>
         <div>
-          <q-form @submit="onSubmit" @reset="onReset" class="q-my-md">
+          <q-form @submit="onSubmit" @reset="onReset" class="q-my-md q-pr-xl">
             <q-input
               standout
               class="full-width q-mb-md text-white"
@@ -70,6 +48,7 @@
               :dense="dense"
               label-color="white"
               color="white"
+              dark
             />
             <q-input
               standout
@@ -81,6 +60,7 @@
               :dense="dense"
               label-color="white"
               color="white"
+              dark
             />
             <q-input
               class="full-width q-mb-md text-white"
@@ -92,21 +72,25 @@
               :dense="dense"
               label-color="white"
               color="white"
+              dark
             />
-            <div>
+            <div class="flex justify-end">
               <q-btn
-                class="btn-form q-mt-md"
+                class="q-mt-sm btn-contact"
                 rounded
                 unelevated
                 no-caps
                 label="Send"
                 type="submit"
-                color="primary"
+                color="warning"
               />
             </div>
           </q-form>
         </div>
       </div>
+    </div>
+    <div class="text-center text-white q-pb-md bg-black q-py-md">
+      © 2024 All rights reserved, At.Code.
     </div>
   </section>
 </template>
@@ -125,9 +109,7 @@ const accept = ref(false);
 const socialMediaIcons = [
   "fab fa-instagram",
   "fab fa-facebook",
-  "fab fa-twitter",
-  "fab fa-facebook-messenger",
-  "fab fa-snapchat",
+  "fa-brands fa-x-twitter",
 ];
 
 const loadBusiness = async () => {
@@ -141,16 +123,6 @@ const loadBusiness = async () => {
 };
 
 onMounted(loadBusiness);
-
-// onMounted(async () => {
-//   try {
-//     const data = await getData("business");
-//     admin.value = data.business;
-//     console.log("🚀 ~ onMounted ~ admin.value:", admin.value);
-//   } catch (error) {
-//     console.error("Error al obtener datos de negocios:", error);
-//   }
-// });
 
 const onReset = () => {
   name.value = "";
@@ -174,10 +146,13 @@ const onSubmit = async () => {
 </script>
 
 <style lang="scss" scope>
-.btn-form {
-  width: 100%;
-}
-.icon-search {
+.icon-footer {
   font-size: 1.8rem;
+  cursor: pointer;
+  color: white;
+}
+.btn-contact {
+  width: 100%;
+  max-width: 100px;
 }
 </style>

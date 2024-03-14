@@ -1,39 +1,35 @@
 <template>
   <section class="">
-    <div class="row">
+    <div class="flex items-center">
       <div class="col">
-        <div class="flex items-center full-height q-mx-lg">
-          <div class="q-pa-md">
-            <q-list>
-              <q-item
-                clickable
-                v-ripple
-                v-for="contact in contacts"
-                :key="contact.label"
-              >
-                <q-item-section avatar>
-                  <q-img :src="`/src/assets/${contact.icon}`"></q-img>
-                </q-item-section>
-                <q-item-section class="text-h6 text-grey-7">{{
-                  contact.label
-                }}</q-item-section>
-              </q-item>
-            </q-list>
-            <div class="flex justify-center q-mt-md">
-              <q-icon
-                class="icon-search q-ml-md"
-                v-for="icon in socialMediaIcons"
-                :key="icon"
-                :name="icon"
-              />
-            </div>
-          </div>
+        <div class="q-mx-lg">
+          <q-list>
+            <q-item
+              clickable
+              v-ripple
+              v-for="contact in contacts"
+              :key="contact.label"
+            >
+              <q-item-section avatar>
+                <q-img :src="`/src/assets/${contact.icon}`"></q-img>
+              </q-item-section>
+              <q-item-section class="text-h6 text-grey-7">{{
+                contact.label
+              }}</q-item-section>
+            </q-item>
+          </q-list>
+        </div>
+        <div class="text-center">
+          <q-icon
+            class="icon-search q-mt-md q-mr-md"
+            v-for="icon in socialMediaIcons"
+            :key="icon"
+            :name="icon"
+          />
         </div>
       </div>
       <div class="col q-mx-none q-px-none">
-        <div class="q-ml-lg q-mt-lg q-pl-xs text-h6 text-grey-7">
-          Get in Touch
-        </div>
+        <div class="q-ml-lg q-pl-xs text-h6 text-grey-7">Contact</div>
         <div class="q-pa-lg q-mx-lg">
           <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
             <q-input
@@ -99,9 +95,7 @@ const contacts = [
 const socialMediaIcons = [
   "fab fa-instagram",
   "fab fa-facebook",
-  "fab fa-twitter",
-  "fab fa-facebook-messenger",
-  "fab fa-snapchat",
+  "fa-brands fa-x-twitter",
 ];
 
 const onSubmit = () => {
@@ -132,6 +126,7 @@ const onReset = () => {
 
 <style lang="scss" scope>
 .icon-search {
+  color: purple;
   font-size: 1.7rem;
   cursor: pointer;
 }

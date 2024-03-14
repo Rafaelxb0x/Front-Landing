@@ -29,7 +29,6 @@ const loadGallery = async () => {
     console.log("🚀 ~ loadGallery ~ value:", sections.value);
   } catch (error) {
     console.error(error.message);
-    // Puedes ajustar el comportamiento en caso de error según tus necesidades
   }
 };
 
@@ -47,7 +46,6 @@ onMounted(loadGallery);
 .main h1 {
   font-size: 2.8rem;
   font-weight: 650;
-  color: purple;
   margin-bottom: 20px;
 }
 

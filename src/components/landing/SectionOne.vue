@@ -1,14 +1,14 @@
 <template>
   <div class="container-cards full-width">
-    <div class="text-center text-h4 text-grey-8 q-mt-lg q-pt-lg">
+    <div class="text-center q-mt-lg q-pt-lg text-plans-title">
       Why Choose Us
     </div>
-    <div class="text-center text-body1 margin-banner">
+    <div class="text-center text-body1 margin-banner q-mb-lg">
       Our clients have been choosing softlabs for a number of reasons including
       reliability, lastest technologies and constant updates & support. Read
       more about other adventages below.
     </div>
-    <div class="q-pa-md q-gutter-md">
+    <div class="q-pa-md q-gutter-md q-mb-lg">
       <div v-if="sections" class="flex no-wrap justify-around">
         <q-card
           v-for="card in sections"
@@ -46,7 +46,6 @@ const loadCards = async () => {
     console.log("🚀 ~ loadCards ~ sections.value:", sections.value);
   } catch (error) {
     console.error(error.message);
-    // Puedes ajustar el comportamiento en caso de error según tus necesidades
   }
 };
 
@@ -55,8 +54,8 @@ onMounted(loadCards);
 
 <style lang="scss" scope>
 .img-card {
-  width: 200px !important;
-  height: 200px !important;
+  width: 120px !important;
+  height: 120px !important;
   background-position: cover;
   background-repeat: no-repeat;
 }
@@ -74,5 +73,11 @@ onMounted(loadCards);
 .container-cards {
   width: 100%;
   padding: 0 20%;
+}
+
+.text-plans-title {
+  font-size: 2.8rem;
+  font-weight: 650;
+  margin-bottom: 50px;
 }
 </style>
